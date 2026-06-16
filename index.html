@@ -29,6 +29,11 @@
       min-height: 100%;
     }
 
+    html,
+    body {
+      overflow: hidden;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -38,14 +43,63 @@
       padding: 24px;
       font-family: Arial, "Microsoft YaHei", sans-serif;
       background-color: #091225;
-      background-image:
-        linear-gradient(180deg, rgba(8, 18, 45, 0.18), rgba(7, 12, 31, 0.72)),
-        linear-gradient(90deg, rgba(7, 12, 31, 0.68), rgba(7, 12, 31, 0.06) 48%, rgba(7, 12, 31, 0.7)),
-        url("assets/hero-anime.webp");
+      color: #ffffff;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -3%;
+      z-index: -2;
+      background-image: url("assets/hero-anime.webp");
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      color: #ffffff;
+      animation: animeDrift 28s ease-in-out infinite alternate;
+      will-change: transform, filter;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(180deg, rgba(8, 18, 45, 0.18), rgba(7, 12, 31, 0.72)),
+        linear-gradient(90deg, rgba(7, 12, 31, 0.68), rgba(7, 12, 31, 0.06) 48%, rgba(7, 12, 31, 0.7)),
+        radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.26) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 72% 12%, rgba(255, 255, 255, 0.22) 0 1px, transparent 1.5px);
+      background-size: auto, auto, 180px 180px, 240px 240px;
+      opacity: 1;
+      animation: starFloat 18s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes animeDrift {
+      0% {
+        transform: scale(1) translate3d(-0.6%, -0.4%, 0);
+        filter: saturate(1) brightness(1);
+      }
+
+      50% {
+        transform: scale(1.035) translate3d(0.7%, 0.4%, 0);
+        filter: saturate(1.06) brightness(1.02);
+      }
+
+      100% {
+        transform: scale(1.07) translate3d(-0.2%, 0.8%, 0);
+        filter: saturate(1.03) brightness(0.98);
+      }
+    }
+
+    @keyframes starFloat {
+      0% {
+        background-position: 0 0, 0 0, 0 0, 0 0;
+      }
+
+      100% {
+        background-position: 0 0, 0 0, 32px -46px, -38px -72px;
+      }
     }
 
     .music-toggle {
@@ -103,6 +157,9 @@
     @media (max-width: 640px) {
       body {
         padding: 18px;
+      }
+
+      body::before {
         background-position: center bottom;
       }
 
@@ -111,6 +168,13 @@
         bottom: 18px;
         width: 48px;
         height: 48px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before,
+      body::after {
+        animation: none;
       }
     }
   </style>
