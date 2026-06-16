@@ -48,29 +48,56 @@
       color: #ffffff;
     }
 
-    main {
-      width: min(100%, 760px);
-      padding: 56px 20px;
-      text-align: center;
+    .music-toggle {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 10;
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      background: rgba(9, 18, 37, 0.52);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+      backdrop-filter: blur(14px);
+      cursor: pointer;
     }
 
-    h1 {
-      margin: 0 0 14px;
-      font-size: 56px;
-      line-height: 1.08;
-      font-weight: 800;
-      letter-spacing: 0;
-      text-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
-      overflow-wrap: anywhere;
+    .music-toggle:hover {
+      background: rgba(18, 33, 63, 0.7);
     }
 
-    p {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.84);
-      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.42);
-      overflow-wrap: anywhere;
+    .music-toggle:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .music-toggle__play {
+      width: 0;
+      height: 0;
+      margin-left: 4px;
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      border-left: 15px solid currentColor;
+    }
+
+    .music-toggle__pause {
+      display: none;
+      width: 15px;
+      height: 18px;
+      border-left: 5px solid currentColor;
+      border-right: 5px solid currentColor;
+    }
+
+    .music-toggle.is-playing .music-toggle__play {
+      display: none;
+    }
+
+    .music-toggle.is-playing .music-toggle__pause {
+      display: block;
     }
 
     @media (max-width: 640px) {
@@ -79,25 +106,57 @@
         background-position: center bottom;
       }
 
-      main {
-        padding: 36px 8px;
-      }
-
-      h1 {
-        font-size: 34px;
-        line-height: 1.16;
-      }
-
-      p {
-        font-size: 17px;
+      .music-toggle {
+        right: 18px;
+        bottom: 18px;
+        width: 48px;
+        height: 48px;
       }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>你好，这是我的网站</h1>
-    <p>cczzqqyy999.me</p>
-  </main>
+  <audio id="backgroundMusic" src="assets/flower-sea.mp3" preload="metadata" loop></audio>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="播放背景音乐" aria-pressed="false" disabled>
+    <span class="music-toggle__play" aria-hidden="true"></span>
+    <span class="music-toggle__pause" aria-hidden="true"></span>
+  </button>
+  <script>
+    const music = document.getElementById("backgroundMusic");
+    const musicToggle = document.getElementById("musicToggle");
+
+    music.addEventListener("loadedmetadata", () => {
+      musicToggle.disabled = false;
+    });
+
+    music.addEventListener("error", () => {
+      musicToggle.disabled = true;
+      musicToggle.classList.remove("is-playing");
+      musicToggle.setAttribute("aria-label", "背景音乐文件未就绪");
+      musicToggle.setAttribute("aria-pressed", "false");
+    });
+
+    musicToggle.addEventListener("click", async () => {
+      if (music.paused) {
+        try {
+          await music.play();
+          musicToggle.classList.add("is-playing");
+          musicToggle.setAttribute("aria-label", "暂停背景音乐");
+          musicToggle.setAttribute("aria-pressed", "true");
+        } catch {
+          musicToggle.classList.remove("is-playing");
+          musicToggle.setAttribute("aria-label", "播放背景音乐");
+          musicToggle.setAttribute("aria-pressed", "false");
+        }
+
+        return;
+      }
+
+      music.pause();
+      musicToggle.classList.remove("is-playing");
+      musicToggle.setAttribute("aria-label", "播放背景音乐");
+      musicToggle.setAttribute("aria-pressed", "false");
+    });
+  </script>
 </body>
 </html>
