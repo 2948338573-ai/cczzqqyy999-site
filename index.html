@@ -82,10 +82,12 @@
       top: var(--top);
       left: var(--left);
       width: var(--length);
-      height: 2px;
+      height: 3px;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95));
-      box-shadow: 0 0 14px rgba(152, 208, 255, 0.8);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(170, 220, 255, 0.52) 45%, rgba(255, 255, 255, 1));
+      box-shadow:
+        0 0 12px rgba(155, 216, 255, 0.9),
+        0 0 28px rgba(155, 216, 255, 0.55);
       opacity: 0;
       transform: rotate(-28deg) translateX(0);
       transform-origin: right center;
@@ -98,11 +100,13 @@
       position: absolute;
       right: -2px;
       top: 50%;
-      width: 5px;
-      height: 5px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #ffffff;
-      box-shadow: 0 0 16px rgba(255, 255, 255, 0.95);
+      box-shadow:
+        0 0 16px rgba(255, 255, 255, 1),
+        0 0 30px rgba(150, 210, 255, 0.9);
       transform: translateY(-50%);
     }
 
@@ -255,6 +259,11 @@
     <span class="meteor" style="--top: 16%; --left: 168%; --length: 180px; --duration: 10.4s; --delay: -6.1s;"></span>
     <span class="meteor" style="--top: 36%; --left: 160%; --length: 88px; --duration: 5.9s; --delay: -8.3s;"></span>
     <span class="meteor" style="--top: 61%; --left: 175%; --length: 140px; --duration: 8.7s; --delay: -10.7s;"></span>
+    <span class="meteor" style="--top: 6%; --left: 132%; --length: 210px; --duration: 5.2s; --delay: -0.4s;"></span>
+    <span class="meteor" style="--top: 48%; --left: 166%; --length: 160px; --duration: 6.1s; --delay: -1.8s;"></span>
+    <span class="meteor" style="--top: 22%; --left: 188%; --length: 190px; --duration: 7.1s; --delay: -3.2s;"></span>
+    <span class="meteor" style="--top: 67%; --left: 156%; --length: 126px; --duration: 6.6s; --delay: -5.9s;"></span>
+    <span class="meteor" style="--top: 39%; --left: 184%; --length: 220px; --duration: 8.1s; --delay: -7.6s;"></span>
   </div>
   <audio id="backgroundMusic" src="assets/flower-sea.mp3" preload="metadata" loop></audio>
   <button class="music-toggle" id="musicToggle" type="button" aria-label="播放背景音乐" aria-pressed="false" disabled>
