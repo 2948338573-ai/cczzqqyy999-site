@@ -12,13 +12,13 @@
   <meta property="og:title" content="我的网站">
   <meta property="og:description" content="cczzqqyy999.me 的个人网站。">
   <meta property="og:url" content="https://cczzqqyy999.me/">
-  <meta property="og:image" content="https://cczzqqyy999.me/assets/hero-anime.png">
+  <meta property="og:image" content="https://cczzqqyy999.me/assets/space-cinema-bg.png">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="我的网站">
   <meta name="twitter:description" content="cczzqqyy999.me 的个人网站。">
-  <meta name="twitter:image" content="https://cczzqqyy999.me/assets/hero-anime.png">
-  <meta name="theme-color" content="#172554">
-  <link rel="preload" href="assets/hero-anime.webp" as="image" type="image/webp">
+  <meta name="twitter:image" content="https://cczzqqyy999.me/assets/space-cinema-bg.png">
+  <meta name="theme-color" content="#05070c">
+  <link rel="preload" href="assets/space-cinema-bg.webp" as="image" type="image/webp">
   <title>我的网站</title>
   <style>
     * {
@@ -38,11 +38,9 @@
       margin: 0;
       min-height: 100vh;
       min-height: 100svh;
-      display: grid;
-      place-items: center;
       padding: 24px;
       font-family: Arial, "Microsoft YaHei", sans-serif;
-      background-color: #091225;
+      background-color: #05070c;
       color: #ffffff;
       isolation: isolate;
     }
@@ -51,115 +49,210 @@
       content: "";
       position: fixed;
       inset: 0;
-      z-index: -4;
-      background-image: url("assets/hero-anime.webp");
+      z-index: -6;
+      background-image: url("assets/space-cinema-bg.webp");
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
+      transform: scale(1.03);
+      animation: orbitalFrame 42s ease-in-out infinite alternate;
+      will-change: transform, filter;
     }
 
     body::after {
       content: "";
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: -2;
       background-image:
-        linear-gradient(180deg, rgba(8, 18, 45, 0.18), rgba(7, 12, 31, 0.72)),
-        linear-gradient(90deg, rgba(7, 12, 31, 0.68), rgba(7, 12, 31, 0.06) 48%, rgba(7, 12, 31, 0.7));
+        linear-gradient(180deg, rgba(3, 5, 10, 0.28), rgba(3, 5, 10, 0.18) 45%, rgba(2, 3, 7, 0.72)),
+        radial-gradient(circle at 50% 66%, rgba(255, 198, 112, 0.12), transparent 30%),
+        radial-gradient(circle at 74% 16%, rgba(146, 192, 255, 0.16), transparent 24%),
+        linear-gradient(90deg, rgba(2, 3, 8, 0.72), rgba(2, 3, 8, 0.03) 48%, rgba(2, 3, 8, 0.72));
       pointer-events: none;
     }
 
-    .meteor-layer {
+    .cinema-stage,
+    .stars-drift,
+    .accretion-halo,
+    .lens-sweep,
+    .film-grain,
+    .ship-glint,
+    .letterbox {
       position: fixed;
       inset: 0;
-      z-index: -2;
-      overflow: hidden;
       pointer-events: none;
     }
 
-    .meteor {
-      position: absolute;
-      top: var(--top);
-      left: var(--left);
-      width: var(--length);
-      height: 3px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(170, 220, 255, 0.52) 45%, rgba(255, 255, 255, 1));
-      box-shadow:
-        0 0 12px rgba(155, 216, 255, 0.9),
-        0 0 28px rgba(155, 216, 255, 0.55);
-      opacity: 0;
-      transform: rotate(-28deg) translateX(0);
-      transform-origin: right center;
-      animation: meteorFall var(--duration) linear infinite;
-      animation-delay: var(--delay);
+    .cinema-stage {
+      z-index: -5;
+      overflow: hidden;
     }
 
-    .meteor::after {
+    .stars-drift {
+      z-index: -4;
+      background-image:
+        radial-gradient(circle at 12% 24%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 78% 18%, rgba(180, 215, 255, 0.65) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 42% 9%, rgba(255, 225, 180, 0.48) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 64% 42%, rgba(255, 255, 255, 0.34) 0 1px, transparent 1.5px);
+      background-size: 220px 220px, 310px 310px, 420px 420px, 540px 540px;
+      mix-blend-mode: screen;
+      opacity: 0.72;
+      animation: starField 54s linear infinite;
+    }
+
+    .accretion-halo {
+      z-index: -3;
+      top: auto;
+      left: 50%;
+      bottom: 18svh;
+      width: min(72vw, 980px);
+      height: min(17vw, 210px);
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at center, transparent 0 31%, rgba(255, 214, 143, 0.2) 37%, rgba(255, 187, 91, 0.42) 42%, transparent 55%),
+        conic-gradient(from 90deg, transparent, rgba(255, 230, 170, 0.18), transparent, rgba(255, 171, 71, 0.32), transparent);
+      filter: blur(1px) drop-shadow(0 0 22px rgba(255, 178, 79, 0.38));
+      transform: translateX(-50%) rotateX(66deg) rotateZ(-2deg);
+      transform-origin: 50% 50%;
+      mix-blend-mode: screen;
+      animation: accretionPulse 7.2s ease-in-out infinite;
+    }
+
+    .lens-sweep {
+      z-index: -1;
+      background:
+        linear-gradient(105deg, transparent 0 38%, rgba(255, 255, 255, 0.12) 47%, transparent 58%),
+        radial-gradient(ellipse at 50% 66%, rgba(255, 205, 135, 0.24), transparent 28%);
+      opacity: 0;
+      transform: translateX(-38%);
+      mix-blend-mode: screen;
+      animation: lensSweep 11s ease-in-out infinite;
+    }
+
+    .ship-glint {
+      z-index: -1;
+      top: 26%;
+      left: 82%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.9),
+        -70px 0 58px rgba(152, 199, 255, 0.26);
+      animation: signalBlink 4.8s ease-in-out infinite;
+    }
+
+    .film-grain {
+      z-index: 1;
+      opacity: 0.22;
+      background-image:
+        repeating-radial-gradient(circle at 17% 23%, rgba(255, 255, 255, 0.34) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 4px);
+      background-size: 120px 120px, 6px 6px;
+      mix-blend-mode: overlay;
+      animation: grainShift 0.9s steps(2, end) infinite;
+    }
+
+    .letterbox {
+      z-index: 2;
+    }
+
+    .letterbox::before,
+    .letterbox::after {
       content: "";
       position: absolute;
-      right: -2px;
-      top: 50%;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ffffff;
-      box-shadow:
-        0 0 16px rgba(255, 255, 255, 1),
-        0 0 30px rgba(150, 210, 255, 0.9);
-      transform: translateY(-50%);
+      left: 0;
+      width: 100%;
+      height: 7.5svh;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.72));
     }
 
-    .hair-wind {
-      position: fixed;
-      top: 54.7svh;
-      left: calc(50% - 5.05svh);
-      z-index: -3;
-      width: 10.1svh;
-      aspect-ratio: 1;
-      background: url("assets/hair-overlay.png") center / contain no-repeat;
-      transform-origin: 50% 82%;
-      animation: hairWind 2.4s ease-in-out infinite;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.18));
-      pointer-events: none;
+    .letterbox::before {
+      top: 0;
     }
 
-    @keyframes meteorFall {
+    .letterbox::after {
+      bottom: 0;
+      transform: rotate(180deg);
+    }
+
+    @keyframes orbitalFrame {
       0% {
-        opacity: 0;
-        transform: rotate(-28deg) translateX(0);
-      }
-
-      8% {
-        opacity: 1;
-      }
-
-      34% {
-        opacity: 0.95;
+        transform: scale(1.03) translate3d(-0.5%, -0.3%, 0);
+        filter: contrast(1.04) saturate(0.92) brightness(0.98);
       }
 
       100% {
-        opacity: 0;
-        transform: rotate(-28deg) translateX(-145vw);
+        transform: scale(1.075) translate3d(0.6%, 0.5%, 0);
+        filter: contrast(1.08) saturate(1.02) brightness(1.03);
       }
     }
 
-    @keyframes hairWind {
+    @keyframes starField {
+      0% {
+        background-position: 0 0, 0 0, 0 0, 0 0;
+      }
+
+      100% {
+        background-position: 120px -180px, -160px 120px, 90px 210px, -210px -120px;
+      }
+    }
+
+    @keyframes accretionPulse {
       0%,
       100% {
-        transform: translate3d(0, 0, 0) rotate(0deg) skewX(0deg);
+        opacity: 0.74;
+        transform: translateX(-50%) rotateX(66deg) rotateZ(-2deg) scale(1);
       }
 
-      28% {
-        transform: translate3d(1px, -0.5px, 0) rotate(1.8deg) skewX(2deg);
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) rotateX(66deg) rotateZ(1deg) scale(1.045);
+      }
+    }
+
+    @keyframes lensSweep {
+      0%,
+      72%,
+      100% {
+        opacity: 0;
+        transform: translateX(-42%);
       }
 
-      58% {
-        transform: translate3d(-1px, 0.5px, 0) rotate(-1.2deg) skewX(-1.4deg);
+      82% {
+        opacity: 0.85;
       }
 
-      78% {
-        transform: translate3d(0.5px, -0.5px, 0) rotate(1deg) skewX(1.2deg);
+      94% {
+        opacity: 0;
+        transform: translateX(42%);
+      }
+    }
+
+    @keyframes signalBlink {
+      0%,
+      76%,
+      100% {
+        opacity: 0.25;
+        transform: scale(0.76);
+      }
+
+      82% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes grainShift {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(-2%, 1.5%, 0);
       }
     }
 
@@ -221,13 +314,18 @@
       }
 
       body::before {
-        background-position: center bottom;
+        background-position: center;
       }
 
-      .hair-wind {
-        top: 54.7svh;
-        width: 10.1svh;
-        left: calc(50% - 5.05svh);
+      .accretion-halo {
+        bottom: 24svh;
+        width: 104vw;
+        height: 24vw;
+      }
+
+      .letterbox::before,
+      .letterbox::after {
+        height: 5.5svh;
       }
 
       .music-toggle {
@@ -239,31 +337,25 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .meteor,
-      .hair-wind {
+      body::before,
+      .stars-drift,
+      .accretion-halo,
+      .lens-sweep,
+      .ship-glint,
+      .film-grain {
         animation: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="hair-wind" aria-hidden="true"></div>
-  <div class="meteor-layer" aria-hidden="true">
-    <span class="meteor" style="--top: 8%; --left: 112%; --length: 150px; --duration: 5.8s; --delay: -1.1s;"></span>
-    <span class="meteor" style="--top: 18%; --left: 126%; --length: 112px; --duration: 6.9s; --delay: -3.6s;"></span>
-    <span class="meteor" style="--top: 31%; --left: 118%; --length: 132px; --duration: 7.4s; --delay: -5.2s;"></span>
-    <span class="meteor" style="--top: 12%; --left: 146%; --length: 92px; --duration: 8.6s; --delay: -7.4s;"></span>
-    <span class="meteor" style="--top: 25%; --left: 138%; --length: 170px; --duration: 9.2s; --delay: -9s;"></span>
-    <span class="meteor" style="--top: 42%; --left: 152%; --length: 124px; --duration: 6.4s; --delay: -2.2s;"></span>
-    <span class="meteor" style="--top: 54%; --left: 144%; --length: 100px; --duration: 7.8s; --delay: -4.8s;"></span>
-    <span class="meteor" style="--top: 16%; --left: 168%; --length: 180px; --duration: 10.4s; --delay: -6.1s;"></span>
-    <span class="meteor" style="--top: 36%; --left: 160%; --length: 88px; --duration: 5.9s; --delay: -8.3s;"></span>
-    <span class="meteor" style="--top: 61%; --left: 175%; --length: 140px; --duration: 8.7s; --delay: -10.7s;"></span>
-    <span class="meteor" style="--top: 6%; --left: 132%; --length: 210px; --duration: 5.2s; --delay: -0.4s;"></span>
-    <span class="meteor" style="--top: 48%; --left: 166%; --length: 160px; --duration: 6.1s; --delay: -1.8s;"></span>
-    <span class="meteor" style="--top: 22%; --left: 188%; --length: 190px; --duration: 7.1s; --delay: -3.2s;"></span>
-    <span class="meteor" style="--top: 67%; --left: 156%; --length: 126px; --duration: 6.6s; --delay: -5.9s;"></span>
-    <span class="meteor" style="--top: 39%; --left: 184%; --length: 220px; --duration: 8.1s; --delay: -7.6s;"></span>
+  <div class="cinema-stage" aria-hidden="true">
+    <div class="stars-drift"></div>
+    <div class="accretion-halo"></div>
+    <div class="lens-sweep"></div>
+    <div class="ship-glint"></div>
+    <div class="film-grain"></div>
+    <div class="letterbox"></div>
   </div>
   <audio id="backgroundMusic" src="assets/flower-sea.mp3" preload="metadata" loop></audio>
   <button class="music-toggle" id="musicToggle" type="button" aria-label="播放背景音乐" aria-pressed="false" disabled>
